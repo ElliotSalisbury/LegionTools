@@ -29,15 +29,7 @@ if( $dbh ) {
 	$result = $sth->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT);
 	$url = $result['link'];
 
-	if( ($isFirst && $url != null) || $numEntries == 0 ) {
-		// If there is no current task of the assigned name, create one
-		$sql = "INSERT INTO triggerFlag(task) VALUES(:task)";
-        	$sth = $dbh->prepare($sql);
-        	$sth->execute(array(":task"=>$task));
-	}
-	else {
-		echo($url);
-	}
+	echo($url);
 	
 }
 

@@ -19,6 +19,10 @@ if( $dbh ) {
 	$sth = $dbh->prepare($sql); 
 	$sth->execute(array(':task' => $task));
 	
+	$sql = "INSERT INTO triggerFlag(task) VALUES(:task)";
+	$sth = $dbh->prepare($sql);
+	$sth->execute(array(":task"=>$task));
+	
 }
 
 ?>
