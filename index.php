@@ -362,7 +362,7 @@
   <div class="cool-block">
     <div class="cool-block-bor">
       <span class="grandTitre text-primary">Workers ready</span>
-      <p id = "numOnlineText"><span id="numOnline">x</span></p>
+      <p id = "numOnlineText"><span id="numOnline">x</span>/<span id="numConnected">x</span></p>
       <form class="form-horizontal" role="form">
         <div class="form-group">
           <div class="col-lg-10 col-lg-offset-1">
