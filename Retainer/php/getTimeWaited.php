@@ -15,24 +15,11 @@ if( $dbh ) {
 
 	$worker = $_REQUEST['workerId'];
 	
-	$sql1 = "SELECT startTime from workers WHERE wid=:wid ORDER BY id DESC LIMIT 1";
+	$sql1 = "SELECT strftime('%s',endTime)-strftime('%s',startTime) AS timeDiff FROM workers WHERE wid=:wid ORDER BY id DESC LIMIT 1";
 	$sth1 = $dbh->prepare($sql1); 
 	$sth1->execute(array(':wid' => $worker));
 	$result = $sth1->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT);
-	$startTime = $result['startTime'];
-	
-	$sql1 = "SELECT endTime from workers WHERE wid=:wid ORDER BY id DESC LIMIT 1";
-	$sth1 = $dbh->prepare($sql1); 
-	$sth1->execute(array(':wid' => $worker));
-	$result = $sth1->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT);
-	$endTime = $result['endTime'];
-	
-	
-	$sql1 = "SELECT TIME_TO_SEC(TIMEDIFF(:endTime, :startTime)) AS time";
-	$sth1 = $dbh->prepare($sql1); 
-	$sth1->execute(array(':startTime' => $startTime, ':endTime' => $endTime));
-	$result = $sth1->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT);
-	$timeWaited = $result['time'];
+	$timeWaited = $result['timeDiff'];
 	
 	echo($timeWaited);
 	
