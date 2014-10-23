@@ -16,11 +16,11 @@ if( $dbh ) {
 	$isFirst = ($_REQUEST["first"] == "true"); // Need to convert the string to logic
 
 	// Get the number of entries total
-	$sql = "SELECT count(*) as numEntries FROM triggerFlag WHERE task=:task";
+	$sql = "SELECT count(*) as numentries FROM triggerFlag WHERE task=:task";
 	$sth = $dbh->prepare($sql); 
 	$sth->execute(array(":task"=>$task));
 	$result = $sth->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT);
-	$numEntries = $result['numEntries'];
+	$numEntries = $result['numentries'];
 
 	// Get the highest index link
 	$sql = "SELECT link FROM triggerFlag WHERE task=:task ORDER BY id DESC LIMIT 1";

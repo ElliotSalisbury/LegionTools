@@ -16,18 +16,18 @@ if( $dbh ) {
 	$task = $_REQUEST['task'];
 
 	//get max and sent
-	$sql = "SELECT * FROM released WHERE url=:url and task=:task ORDER BY ID DESC LIMIT 1";
+	$sql = "SELECT * FROM released WHERE url=:url and task=:task ORDER BY id DESC LIMIT 1";
 	$sth = $dbh->prepare($sql); 
 	$sth->execute(array(":url"=>$url, ":task"=>$task));
 	$result = $sth->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT);
 	$max = $result['max'];
 	$sent = $result['sent'];
-	$ID = $result['ID'];
+	$ID = $result['id'];
 
 	if($sent < $max)
 	{
 		$sent = $sent + 1;
-		$sql = "UPDATE released SET sent=:sent WHERE ID=:ID";
+		$sql = "UPDATE released SET sent=:sent WHERE id=:ID";
 		$sth = $dbh->prepare($sql); 
 		$sth->execute(array(":ID"=>$ID, ":sent"=>$sent));
 		echo("true");

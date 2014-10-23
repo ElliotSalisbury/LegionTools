@@ -31,5 +31,5 @@ $(document).ready(function() {
 				alert("getConnected failed!")
 			},
 		});
-	}, 1000);
+	}, 5000);
 });

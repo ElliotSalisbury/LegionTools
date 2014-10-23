@@ -15,7 +15,7 @@ $isActive = 1;
 if( $dbh ) {
 
 	$worker = $_REQUEST['workerId'];
-	$stmt = $dbh->prepare("SELECT count(*) FROM `whois_online` WHERE `id` = :id LIMIT 1");
+	$stmt = $dbh->prepare("SELECT count(*) FROM whois_online WHERE id = :id LIMIT 1");
   $stmt->execute(array(':id' => $worker));
   $number_of_rows = $stmt->fetchColumn();
   // echo $number_of_rows;

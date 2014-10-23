@@ -31,7 +31,7 @@ if( $dbh ) {
 
 	}
 	else {
-		$sql1 ="UPDATE triggerFlag SET link=:url, fireTime=(DATETIME('now')) WHERE id=:tid";
+		$sql1 ="UPDATE triggerFlag SET link=:url, fireTime=now() WHERE id=:tid";
 		$sth1 = $dbh->prepare($sql1); 
 		$sth1->execute(array(':url' => $url, ':tid' => $triggerId));
 

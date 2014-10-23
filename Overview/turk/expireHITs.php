@@ -39,18 +39,18 @@ function expireHit($hitId){
   		sleep(.25);
   		if($hitInfo->HIT->HITStatus == "Disposed"){
   			// expireHit($hitId);
-  			$sql = ("DELETE FROM hits WHERE hit_Id = :hit_Id");
+  			$sql = ("DELETE FROM hits WHERE hit_id = :hit_Id");
   			$sth = $dbh->prepare($sql);
   			$sth->execute(array(':hit_Id' => $hitId));
   		}
   		else if($hitInfo->HIT->HITStatus == "Reviewable"){
-  			$sql = ("UPDATE hits SET assignable = 0 WHERE hit_Id = :hit_Id");
+  			$sql = ("UPDATE hits SET assignable = 0 WHERE hit_id = :hit_Id");
   			$sth = $dbh->prepare($sql);
   			$sth->execute(array(':hit_Id' => $hitId));
   		}
   	}
   	// else{
-  	// 	$sql = ("DELETE FROM hits WHERE hit_Id = :hit_Id");
+  	// 	$sql = ("DELETE FROM hits WHERE hit_id = :hit_Id");
   	// 	$sth = $dbh->prepare($sql);
   	// 	$sth->execute(array(':hit_Id' => $hitId));
   	// }
