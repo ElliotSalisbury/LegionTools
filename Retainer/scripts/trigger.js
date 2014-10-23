@@ -138,11 +138,50 @@ $("#stopRecruiting").on("click", function(event){
 
     $('#startRecruiting').html('Please wait while recruiting is stopped');
     $('#stopRecruiting').attr('disabled','disabled');
+    var waitForStopTimer = setInterval(function() {
+    	$.ajax({
+            url: "Retainer/php/getNumAssignableHits.php",
+            type: "POST",
+            async: true,
+            data: {task: $("#taskSession").val(), useSandbox: sandbox},
+            dataType: "json",
+            success: function(d) {
+            	if(d <= 0) {
+            		clearInterval(waitForStopTimer);
+            		$('#noSandbox').removeAttr('disabled');
+            		alert("Recruiting stopped");
+            		$('#startRecruiting').removeAttr('disabled');
+            		$('#startRecruiting').html('Start recruiting');
+            	}
+            },
+            fail: function() {
+                alert("checking if recruiting stopped failed");
+            }
+        });
+    	
+    }, 3000);
     // $('#startRecruiting').removeAttr('disabled');
 
     $('#yesSandbox').removeAttr('disabled');
     $('#noSandbox').removeAttr('disabled');
 });
+
+displayHITSTimer = setInterval(function() {
+	$.ajax({
+        url: "Retainer/php/getNumAssignableHits.php",
+        type: "POST",
+        async: true,
+        data: {task: $("#taskSession").val(), useSandbox: sandbox},
+        dataType: "json",
+        success: function(d) {
+        	$("#HITSCount").html(d);
+        },
+        fail: function() {
+            alert("checking if recruiting stopped failed");
+        }
+    });
+	
+}, 3000);
 
 $("#startRecruiting").on("click", function(event){
     event.preventDefault();

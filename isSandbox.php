@@ -9,8 +9,8 @@ $SANDBOX=true;
 
 if(isset($_REQUEST['useSandbox']))
 {
-	if($_REQUEST['useSandbox'] == "true") $SANDBOX = true;
-	else if ($_REQUEST['useSandbox'] == "false") $SANDBOX = false;
+	if($_REQUEST['useSandbox'] == "true") $SANDBOX = 1;
+	else if ($_REQUEST['useSandbox'] == "false") $SANDBOX = 0;
 }
 
 ?>

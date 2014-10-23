@@ -22,7 +22,7 @@ if( $dbh ) {
 	$resultHitIds = array();
 	$resultHits = array();
 
-	$sql = "SELECT hit_Id FROM hits WHERE task = :task AND sandbox = :sandbox";
+	$sql = "SELECT hit_id FROM hits WHERE task = :task AND sandbox = :sandbox";
 	$sth = $dbh->prepare($sql); 
 	$sth->execute(array(':task' => $task, ':sandbox' => $SANDBOX));
 	$hitsForTask = $sth->fetchAll();

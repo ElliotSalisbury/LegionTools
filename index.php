@@ -242,7 +242,8 @@
                            <div class="cta">
                             <div class="cta-buttons">
                               <button type="submit" id="startRecruiting" class="btn btn-info btn-lg">Start recruiting</button> &nbsp;
-                              <button type="submit" id="stopRecruiting" class="btn btn-danger btn-lg">Stop recruiting</button> 
+                              <button type="submit" id="stopRecruiting" class="btn btn-danger btn-lg">Stop recruiting</button>
+                               <span id="HITSCount">X</span>
                             </div>
                           </div>
                         </div>
