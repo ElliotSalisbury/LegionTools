@@ -149,7 +149,7 @@ function removeOldHITs(){
 	$sth = $dbh->prepare($sql);
 	$sth->execute(array(':task' => $_REQUEST['task']));
 
-	$sql = ("SELECT * from hits WHERE task = :task AND sandbox = :sandbox");
+	$sql = ("SELECT * from hits WHERE task = :task AND assignable = 1 AND sandbox = :sandbox");
 	$sth = $dbh->prepare($sql);
 	$sth->execute(array(':task' => $_REQUEST['task'], ':sandbox' => $SANDBOX));
 	$hits = $sth->fetchAll();
@@ -209,7 +209,7 @@ if(isset($_REQUEST['mode']) && $_REQUEST['mode'] == "retainer" || $_REQUEST['mod
 	 	// Post HITs
 		$result = getTaskRowInDb();
 		$qualification = createQualificationRequirement($result);
-		while(!isTargetReached() && ($numAssignableHits < ($result[0]["target_workers"] + 5))) //Number of HITs to post: target number of workers + 5
+		while(!iShouldQuit() && !isTargetReached() && ($numAssignableHits < ($result[0]["target_workers"] + 5))) //Number of HITs to post: target number of workers + 5
 		// while($numAssignableHits < 3) //Number of HITs to post: target number of workers + 5
 		{
 			$minPrice = $result[0]["min_price"];
@@ -241,6 +241,9 @@ if(isset($_REQUEST['mode']) && $_REQUEST['mode'] == "retainer" || $_REQUEST['mod
 		$numAssignableHits = 0;
 
 		foreach ($hits as $hit) {
+			if (iShouldQuit()) {
+				break;
+			}
 			$hitId = $hit['hit_id'];
 			$hitInfo = turk50_getHit($hitId);
 			if($hitInfo->HIT->Request->IsValid == "False"){
